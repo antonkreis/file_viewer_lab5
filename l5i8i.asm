@@ -215,7 +215,7 @@ sub_prev_page:
       
    mov ax, 0
    mov eof_counter, ax
-   jc user_input  
+   ;jc user_input  
    jmp begin_read_file
 end_read_file_proc:    
     ret
