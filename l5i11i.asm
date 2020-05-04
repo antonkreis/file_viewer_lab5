@@ -3,7 +3,7 @@
 .data
     eof_counter dw 0
     exit_flag db 0  
-    prev_button_flag db 0 
+    prev_button_flag db 0  
     file_id dw ? 
     no_more_back_flag db 0
     greeting db 10, 13, "Lab 5: File viewer (in 16-bit format)", 10, 13, '$'
@@ -120,7 +120,7 @@ cld
     jmp read
 eof:
     mov eof_counter, ax 
-    mov al, prev_button_flag
+    
     
 ;    mov bx, ax  
 ;    mov si, offset buffer
@@ -150,8 +150,9 @@ read:
     mov di, offset buffer
     cmp ds:[di], 0
     je begin_of_file_error 
-    cmp al, 0
-    jne user_input 
+    ;mov al, prev_button_flag
+;    cmp al, 0
+;    jne user_input 
     print_string frame
     call convert 
     jmp user_input  
@@ -247,8 +248,7 @@ convert proc near
     mov bx, 0 
 buffer_cycle:
     push bx   
-   ; cmp bx, 288
-;    je end_buffer_cycle
+
     xor ax, ax 
     mov al, ds:[di]
     cmp al, 0
@@ -465,7 +465,7 @@ start:
 
 copy_path:
     mov al, es:[di]
-    cmp al, 13
+    cmp al, 13 
     je end_copy_path
     mov ds:[si], al
     inc si
